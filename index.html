@@ -1,0 +1,327 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+  
+  <script src="lib/RGBELoader.js"></script>
+  
+  <script src="assets/scripts/aframe-env-map-component.js"></script>
+  <script src="assets/scripts/aframe-hdr-environment.js"></script>
+  <script src="assets/scripts/aframe-orbit-controls.js"></script>
+  <script>
+    const showInfo = () => {
+      let y = 0;
+
+      const webButton = document.querySelector("#web-button");
+      const facebookButton = document.querySelector("#facebook-button");
+      const instagramButton = document.querySelector("#instagram-button");
+      const tiktokButton = document.querySelector("#tiktok-button");
+      const text = document.querySelector("#text");
+
+      webButton.setAttribute("visible", true);
+      setTimeout(() => {
+        facebookButton.setAttribute("visible", true);
+      }, 300);
+      setTimeout(() => {
+        instagramButton.setAttribute("visible", true);
+      }, 600);
+      setTimeout(() => {
+        tiktokButton.setAttribute("visible", true);
+      }, 900);
+
+      let currentTab = '';
+      // evt click
+      webButton.addEventListener('click', function (evt) {
+        text.setAttribute("value", "WEB | www.patronproductora.com");
+        currentTab = 'web';
+      });
+      facebookButton.addEventListener('click', function (evt) {
+        text.setAttribute("value", "FACEBOOK | @patronproductora");
+        currentTab = 'facebook';
+      });
+      instagramButton.addEventListener('click', function (evt) {
+        text.setAttribute("value", "INSTAGRAM | @patronproductora");
+        currentTab = 'instagram';
+      });
+      tiktokButton.addEventListener('click', function (evt) {
+        console.log("loc");
+        text.setAttribute("value", "TIKTOK | @patronproductora");
+        currentTab = 'tiktok';
+      });
+
+      // evt doble click
+      webButton.addEventListener('dblclick', function (evt) {
+        window.location.href = "https://www.photofama360.com";
+        console.log("jumm ")
+      });
+      facebookButton.addEventListener('dblclick', (event) => {
+        window.open("https://www.w3schools.com");
+      });
+      instagramButton.addEventListener('dblclick', (event) => {
+        window.open("https://www.w3schools.com");
+      });
+      tiktokButton.addEventListener('dblclick', (event) => {
+        window.open("https://www.w3schools.com");
+      });
+
+      // TEXT lyaut
+      text.addEventListener('click', function (evt) {
+        if (currentTab == 'web') {
+          window.location.href = "https://www.facebook.com/patronproductora";
+        }
+        if (currentTab == 'facebook') {
+          window.location.href = "https://www.facebook.com/patronproductora";
+        }
+        if (currentTab == 'instagram') {
+          window.location.href = "https://www.instagram.com/patronproductora/";
+        }
+        if (currentTab == 'tiktok') {
+          window.location.href = "https://www.tiktok.com/@patronproductora";
+        }
+      });
+    }
+
+    AFRAME.registerComponent('mytarget', {
+      init: function () {
+        this.el.addEventListener('targetFound', event => {
+          console.log("target found");
+          showInfo();
+        });
+
+        this.el.addEventListener('targetLost', event => {
+          console.log("target found");
+        });
+        this.el.emit('targetFound');
+      }
+    });
+  </script>
+
+
+
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .example-container {
+      overflow: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    #example-scanning-overlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: transparent;
+      z-index: 2;
+    }
+
+    @media (min-aspect-ratio: 1/1) {
+      #example-scanning-overlay .inner {
+        width: 50vh;
+        height: 50vh;
+      }
+    }
+
+    @media (max-aspect-ratio: 1/1) {
+      #example-scanning-overlay .inner {
+        width: 80vw;
+        height: 80vw;
+      }
+    }
+
+    #example-scanning-overlay .inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      background:
+        linear-gradient(to right, white 10px, transparent 10px) 0 0,
+        linear-gradient(to right, white 10px, transparent 10px) 0 100%,
+        linear-gradient(to left, white 10px, transparent 10px) 100% 0,
+        linear-gradient(to left, white 10px, transparent 10px) 100% 100%,
+        linear-gradient(to bottom, white 10px, transparent 10px) 0 0,
+        linear-gradient(to bottom, white 10px, transparent 10px) 100% 0,
+        linear-gradient(to top, white 10px, transparent 10px) 0 100%,
+        linear-gradient(to top, white 10px, transparent 10px) 100% 100%;
+      background-repeat: no-repeat;
+      background-size: 40px 40px;
+    }
+
+    #example-scanning-overlay.hidden {
+      display: none;
+    }
+
+    #example-scanning-overlay img {
+      opacity: 0.6;
+      width: 90%;
+      align-self: center;
+    }
+
+    #example-scanning-overlay .inner .scanline {
+      position: absolute;
+      width: 100%;
+      height: 10px;
+      background: white;
+      animation: move 2s linear infinite;
+    }
+
+    @keyframes move {
+
+      0%,
+      100% {
+        top: 0%
+      }
+
+      50% {
+        top: calc(100% - 10px)
+      }
+    }
+  </style>
+
+
+</head>
+
+
+<body>
+  <div class="example-container">
+    <div id="example-scanning-overlay" class="hidden">
+      <div class="inner">
+        <img src="./assets/images/card.png" />
+        <div class="scanline"></div>
+      </div>
+    </div>
+
+    <a-scene mindar-image="
+        imageTargetSrc: ./targets.mind;
+        showStats: false; 
+        uiScanning: #example-scanning-overlay;" embedded color-space="sRGB" renderer="colorManagement: true, 
+        physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false"
+      loading-screen="enabled: false"
+      light="defaultLightsEnabled: false"  
+      hdr-environment="url:  assets/images/venice_sunset_1k.hdr; showBackground: false;
+       showGround: false; groundSize: 30  ">
+
+      <a-assets>
+        <img id="icon-web" src="./assets/images/icons/web-icon.svg" />
+        <img id="icon-facebook" src="./assets/images/icons/facebook-icon.svg" />
+        <img id="icon-instagram" src="./assets/images/icons/instagram-icon.svg" />
+        <img id="icon-tiktok" src="./assets/images/icons/tiktok-icon.svg" />
+        <img id="bg" src="./assets/images/bg.png" />
+        <a-asset-item id="patron" src="./assets/models3D/logo-patron2.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
+        raycaster="far: 100000; objects: .clickable">
+      </a-camera>
+
+      <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
+        <a-entity scale="0.5 0.5 0.5" rotation="90 0 0">
+          
+          <a-image 
+          id="bg" 
+          class="clickable" 
+          src="#bg" 
+          position="0 0 0" 
+          height="2.8"
+          width="2.8"
+          opacity="0.98"
+          animation="property: scale; to: 1.5  1.5  1.5; 
+          easing: easeInOutQuad; loop: true; dir: alternate"
+          rotation="90 0 0"></a-image>
+
+          <a-entity 
+          id="patron" 
+          gltf-model="#patron" 
+          scale="0.15 0.15 0.15" 
+          position="0 0.3 0" 
+          animation-mixer></a-entity>
+
+          <a-entity position="-0.5 0 0" scale="2 2 2">
+            <a-image 
+              id="web-button" 
+              class="clickable" 
+              src="#icon-web" 
+              position="-1 0 -0.3" 
+              height="0.15"
+              width="0.15"
+              animation="property: scale; to: 1.5  1.5  1.5; easing: easeInOutQuad; loop: true; dir: alternate"
+              rotation="-90 0 0">
+            </a-image>
+
+            <a-image 
+              id="facebook-button" 
+              class="clickable" 
+              src="#icon-facebook" 
+              position="-1 0 0" 
+              height="0.15"
+              width="0.15"
+              animation="property: scale; to: 1.5  1.5  1.5; easing: easeInOutQuad; loop: true; dir: alternate"
+              material="" 
+              geometry="" 
+              rotation="-90 0 0">
+            </a-image>
+
+            <a-image 
+              id="instagram-button" 
+              class="clickable" 
+              src="#icon-instagram" 
+              position="-1 0 0.3"
+              height="0.15" 
+              width="0.15"
+              animation="property: scale; to: 1.5  1.5  1.5; easing: easeInOutQuad; loop: true; dir: alternate"
+              material="" 
+              geometry="" 
+              rotation="-90 0 0">
+            </a-image>
+
+            <a-image 
+              id="tiktok-button" 
+              class="clickable" 
+              src="#icon-tiktok" 
+              position="-1 0 0.6" 
+              height="0.15"
+              width="0.15"
+              animation="property: scale; to: 1.5  1.5  1.5; easing: easeInOutQuad; loop: true; dir: alternate"
+              material="" 
+              geometry="" 
+              rotation="-90 0 0">
+            </a-image>
+
+            <a-text 
+            id="text" 
+            class="clickable" 
+            value="Producciones Patron" 
+            color="#e89220" 
+            align="center" 
+            width="1.5"
+            position="0.25 0.3 1" 
+            geometry="primitive: plane; height: 0.15; width: 1.5"
+            material="color: #000000  ; opacity: 0.5" 
+            text="" 
+            rotation="-90 0 0" 
+            scale="1.5 1.5 0.1"></a-text>
+            </a-text>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+    </a-scene>
+  </div>
+</body>
+
+</html>

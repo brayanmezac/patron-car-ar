@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+
+  <script src="lib/RGBELoader.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="assets/scripts/aframe-env-map-component.js"></script>
+  <script src="assets/scripts/aframe-hdr-environment.js"></script>
+  <script src="assets/scripts/aframe-orbit-controls.js"></script>
+
+  <title>scene</title>
+</head>
+
+<body>
+  
+<a-scene light="defaultLightsEnabled: false"  
+  hdr-environment="url:  assets/images/venice_sunset_1k.hdr; showBackground: false; showGround: false; groundSize: 30  ">
+
+  <a-assets>
+    <img alt="" id="icon-web" src="./assets/images/icons/web-icon.svg" />
+    <img alt="" id="icon-facebook" src="./assets/images/icons/facebook-icon.svg" />
+    <img alt="" id="icon-instagram" src="./assets/images/icons/instagram-icon.svg" />
+    <img alt="" id="icon-tiktok" src="./assets/images/icons/tiktok-icon.svg" />
+    <img alt="" id="bg" src="./assets/images/bg.png" />
+    <a-asset-item id="patron" src="./assets/models3D/logo-patron2.glb"></a-asset-item>
+  </a-assets>
+
+
+
+  <a-entity>
+
+    <a-entity scale="0.5 0.5 0.5" rotation="90 0 0">
+      
+      <a-image 
+      id="bg" 
+      class="clickable" 
+      src="#bg" 
+      position="0 0 0" 
+      height="2.8"
+      width="2.8"
+      animation="property: scale; to: 1.5  1.5  1.5; 
+      easing: easeInOutQuad; loop: true; dir: alternate"
+      rotation="90 0 0"></a-image>
+
+      <a-entity 
+      id="patron" 
+      gltf-model="#patron" 
+      scale="0.15 0.15 0.15" 
+      position="0 0.3 0" 
+      animation-mixer></a-entity>
+
+      <a-entity position="-0.5 0 0" scale="2 2 2">
+        <a-image 
+          id="web-button" 
+          class="clickable" 
+          src="#icon-web" 
+          position="-1 0 -0.3" 
+          height="0.15"
+          width="0.15"
+          animation="property: scale; to: 1.5  1.5  1.5; easing: easeInOutQuad; loop: true; dir: alternate"
+          rotation="-90 0 0">
+        </a-image>
+        
+        <a-image 
+          id="facebook-button" 
+          class="clickable" 
+          src="#icon-facebook" 
+          position="-1 0 0" 
+          height="0.15"
+          width="0.15"
+          animation="property: scale; to: 1.5  1.5  1.5; easing: easeInOutQuad; loop: true; dir: alternate"
+          material="" 
+          geometry="" 
+          rotation="-90 0 0">
+        </a-image>
+
+        <a-image 
+          id="instagram-button" 
+          class="clickable" 
+          src="#icon-instagram" 
+          position="-1 0 0.3"
+          height="0.15" 
+          width="0.15"
+          animation="property: scale; to: 1.5  1.5  1.5; easing: easeInOutQuad; loop: true; dir: alternate"
+          material="" 
+          geometry="" 
+          rotation="-90 0 0">
+        </a-image>
+
+        <a-image 
+          id="tiktok-button" 
+          class="clickable" 
+          src="#icon-tiktok" 
+          position="-1 0 0.6" 
+          height="0.15"
+          width="0.15"
+          animation="property: scale; to: 1.5  1.5  1.5; easing: easeInOutQuad; loop: true; dir: alternate"
+          material="" 
+          geometry="" 
+          rotation="-90 0 0">
+        </a-image>
+
+        <a-text 
+          id="text" 
+          class="clickable" 
+          value="Producciones Patron" 
+          color="#b4b4bb" 
+          align="center" 
+          width="1.5"
+          position="0.25 0.3 1" 
+          geometry="primitive: plane; height: 0.15; width: 1.5"
+          material="color: #e89220; opacity: 0.5" 
+          text="" 
+          rotation="-90 0 0" 
+          scale="1.5 1.5 0.1"></a-text>
+      </a-entity>
+    </a-entity>
+  </a-entity>
+</a-scene>
+</body>
+
+</html>
